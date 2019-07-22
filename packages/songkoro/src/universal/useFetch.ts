@@ -5,7 +5,7 @@ import Fetcher, {
   FetchOptions,
 } from '../internals/Fetcher';
 import { SSRManagerContext } from '../internals/SSRManager';
-import useIsomorphicContext from './useIsomorphicContext';
+import { useSongkoroContext } from './SongkoroContext';
 
 async function doFetch(fetchFunction, fetchParam, setResult) {
   setResult({
@@ -30,7 +30,7 @@ const useFetch = (fetchFunction: FetchFunction, fetchOptions: FetchOptions) => {
   const {
     options,
     store,
-  } = useIsomorphicContext();
+  } = useSongkoroContext();
   const ssrManager = React.useContext(SSRManagerContext);
   const { cacheKey, fetchParam } = fetchOptions;
   const isInCache = cacheKey && store[cacheKey];

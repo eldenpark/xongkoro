@@ -1,9 +1,7 @@
-import React from 'react';
-
 const songkoroConstructorSecret = Symbol('songkoroConstructorSecret');
 
-export class Songkoro {
-  options: IsomorphicOptions = {
+export default class Songkoro {
+  options: SongkoroOptions = {
     ssr: false,
   };
   store: SongkoroStore;
@@ -26,19 +24,6 @@ export class Songkoro {
       .replace(/</g, '\\u003c');
   }
 }
-
-export const SongkoroContext = React.createContext<Songkoro | null>(null);
-
-export const SongkoroProvider: React.FC<IsomorphicProviderProps> = ({
-  children,
-  songkoro,
-}) => {
-  return (
-    <SongkoroContext.Provider value={songkoro}>
-      {children}
-    </SongkoroContext.Provider>
-  );
-};
 
 export const createSongkoro = ({
   ssr = false,
@@ -66,10 +51,6 @@ interface CreateIsomorphicArgs {
   store?: object;
 }
 
-interface IsomorphicProviderProps {
-  songkoro: Songkoro;
-}
-
-interface IsomorphicOptions {
+interface SongkoroOptions {
   ssr: boolean;
 }

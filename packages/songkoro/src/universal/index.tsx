@@ -1,8 +1,9 @@
-import {
+import Songkoro, {
   createSongkoro,
-  Songkoro,
-  SongkoroProvider,
 } from './Songkoro';
+import {
+  SongkoroProvider,
+} from './SongkoroContext';
 import useFetch from './useFetch';
 
 export {
