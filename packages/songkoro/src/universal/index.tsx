@@ -1,3 +1,4 @@
+import { FetchFunction } from '../internals/Fetcher';
 import Songkoro, {
   createSongkoro,
 } from './Songkoro';
@@ -8,6 +9,7 @@ import useFetch from './useFetch';
 
 export {
   createSongkoro,
+  FetchFunction,
   Songkoro,
   SongkoroProvider,
   useFetch,
