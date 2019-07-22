@@ -9,7 +9,7 @@
     "react": "^16.8.6",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-router-dom": "^5.0.1",
-    "songkoro": "^0.0.0"
+    "songkoro": "^0.0.1"
   },
   "devDependencies": {
     "@babel/register": "^7.4.4",
@@ -30,5 +30,5 @@
   "license": "ISC",
   "name": "sandbox",
   "private": true,
-  "version": "0.0.0"
+  "version": "0.0.1"
 }
