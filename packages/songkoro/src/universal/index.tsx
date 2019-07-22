@@ -1,13 +1,13 @@
 import {
-  createIsomorphic,
-  Isomorphic,
-  IsomorphicProvider,
-} from './Isomorphic';
+  createSongkoro,
+  Songkoro,
+  SongkoroProvider,
+} from './Songkoro';
 import useFetch from './useFetch';
 
 export {
-  createIsomorphic,
-  Isomorphic,
-  IsomorphicProvider,
+  createSongkoro,
+  Songkoro,
+  SongkoroProvider,
   useFetch,
 };

@@ -1,23 +1,23 @@
 import { BrowserRouter } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import {
-  createIsomorphic,
-  IsomorphicProvider,
+  createSongkoro,
+  SongkoroProvider,
 } from 'songkoro';
 import * as React from 'react';
 
 import Universal from '../universal/Universal';
 
-const isomorphic = createIsomorphic({
+const songkoro = createSongkoro({
   store: window['__APP_STATE__'],
 });
 
 const ClientApp = () => {
   return (
     <BrowserRouter>
-      <IsomorphicProvider isomorphic={isomorphic}>
+      <SongkoroProvider songkoro={songkoro}>
         <Universal />
-      </IsomorphicProvider>
+      </SongkoroProvider>
     </BrowserRouter>
   );
 };

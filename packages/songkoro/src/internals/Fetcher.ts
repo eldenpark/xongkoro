@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
-import { IsomorphicStore } from '../universal/Isomorphic';
+import { SongkoroStore } from '../universal/Songkoro';
 
 export default class Fetcher {
   promise: Promise<any>;
 
-  constructor(fetchFunction: FetchFunction, fetchOptions: FetchOptions, store: IsomorphicStore) {
+  constructor(fetchFunction: FetchFunction, fetchOptions: FetchOptions, store: SongkoroStore) {
     const { cacheKey, fetchParam } = fetchOptions;
     this.promise = new Promise((resolve) => {
       fetchFunction(fetchParam)

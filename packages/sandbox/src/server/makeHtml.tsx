@@ -1,5 +1,5 @@
 import {
-  createIsomorphic,
+  createSongkoro,
 } from 'songkoro';
 import {
   MakeHtml,
@@ -21,12 +21,12 @@ const makeHtml: MakeHtml<State> = async function makeHtml({
   log('makeHtml(): requestUrl: %s, serverState: %j', requestUrl, serverState);
 
   const { socketPath, socketPort, state } = serverState;
-  const isomorphic = createIsomorphic({
+  const songkoro = createSongkoro({
     ssr: true,
   });
   const element = (
     <ServerApp
-      isomorphic={isomorphic}
+      songkoro={songkoro}
       requestUrl={requestUrl}
     />
   );
@@ -36,7 +36,7 @@ const makeHtml: MakeHtml<State> = async function makeHtml({
     renderFunction: renderToString,
   });
 
-  log('makeHtml(): store', Object.keys(isomorphic.store));
+  log('makeHtml(): store', Object.keys(songkoro.store));
   log('makeHtml(): appRootInString length: %s', appRootInString.length);
 
   return `
@@ -45,10 +45,10 @@ const makeHtml: MakeHtml<State> = async function makeHtml({
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
-  <title>express-isomorphic-example</title>
+  <title>songkoro-example</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
   <script>
-    window['__APP_STATE__']=${isomorphic.getStoreObject()}
+    window['__APP_STATE__']=${songkoro.getStoreObject()}
   </script>
 </head>
 <body>

@@ -1,19 +1,19 @@
 import React from 'react';
 
-const isomorphicConstructorSecret = Symbol('isomorphicConstructorSecret');
+const songkoroConstructorSecret = Symbol('songkoroConstructorSecret');
 
-export class Isomorphic {
+export class Songkoro {
   options: IsomorphicOptions = {
     ssr: false,
   };
-  store: IsomorphicStore;
+  store: SongkoroStore;
 
   constructor({
     constructorSecret,
     options,
     store,
   }) {
-    if (constructorSecret !== isomorphicConstructorSecret) {
+    if (constructorSecret !== songkoroConstructorSecret) {
       console.warn('Isomorphic(): Try not to instantiate this using new keyword. Use createIsomorphic() instead'); // eslint-disable-line
     }
 
@@ -27,34 +27,34 @@ export class Isomorphic {
   }
 }
 
-export const IsomorphicContext = React.createContext<Isomorphic | null>(null);
+export const SongkoroContext = React.createContext<Songkoro | null>(null);
 
-export const IsomorphicProvider: React.FC<IsomorphicProviderProps> = ({
+export const SongkoroProvider: React.FC<IsomorphicProviderProps> = ({
   children,
-  isomorphic,
+  songkoro,
 }) => {
   return (
-    <IsomorphicContext.Provider value={isomorphic}>
+    <SongkoroContext.Provider value={songkoro}>
       {children}
-    </IsomorphicContext.Provider>
+    </SongkoroContext.Provider>
   );
 };
 
-export const createIsomorphic = ({
+export const createSongkoro = ({
   ssr = false,
   store = {},
 }: CreateIsomorphicArgs = {}) => {
   const options = {
     ssr,
   };
-  return new Isomorphic({
-    constructorSecret: isomorphicConstructorSecret,
+  return new Songkoro({
+    constructorSecret: songkoroConstructorSecret,
     options,
     store,
   });
 };
 
-export interface IsomorphicStore {
+export interface SongkoroStore {
   [cacheKey: string]: {
     data: null | any;
     error?: any;
@@ -67,7 +67,7 @@ interface CreateIsomorphicArgs {
 }
 
 interface IsomorphicProviderProps {
-  isomorphic: Isomorphic;
+  songkoro: Songkoro;
 }
 
 interface IsomorphicOptions {

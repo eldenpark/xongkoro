@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 
-import { IsomorphicContext } from './Isomorphic';
+import { SongkoroContext } from './Songkoro';
 
-export default function useIsomorphicContext() {
-  const isomorphic = useContext(IsomorphicContext);
+export default function useSongkoroContext() {
+  const isomorphic = useContext(SongkoroContext);
 
   if (!isomorphic) {
     throw new Error('Isomorphic is not provided. Did you use <IsomorphicProvider />?');

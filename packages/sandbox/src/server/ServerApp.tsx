@@ -1,6 +1,6 @@
 import {
-  Isomorphic,
-  IsomorphicProvider,
+  Songkoro,
+  SongkoroProvider,
 } from 'songkoro';
 import { StaticRouter } from 'react-router-dom';
 import React from 'react';
@@ -8,14 +8,14 @@ import React from 'react';
 import Universal from '../universal/Universal';
 
 const ServerApp: React.FC<ServerAppProps> = ({
-  isomorphic,
   requestUrl,
+  songkoro,
 }) => {
   return (
     <StaticRouter location={requestUrl}>
-      <IsomorphicProvider isomorphic={isomorphic}>
+      <SongkoroProvider songkoro={songkoro}>
         <Universal />
-      </IsomorphicProvider>
+      </SongkoroProvider>
     </StaticRouter>
   );
 };
@@ -23,6 +23,6 @@ const ServerApp: React.FC<ServerAppProps> = ({
 export default ServerApp;
 
 interface ServerAppProps {
-  isomorphic: Isomorphic;
   requestUrl: string;
+  songkoro: Songkoro;
 }
