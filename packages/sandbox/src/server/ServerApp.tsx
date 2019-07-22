@@ -1,3 +1,4 @@
+import { Provider } from 'react-redux';
 import {
   Songkoro,
   SongkoroProvider,
@@ -8,14 +9,17 @@ import React from 'react';
 import Universal from '../universal/Universal';
 
 const ServerApp: React.FC<ServerAppProps> = ({
+  reduxStore,
   requestUrl,
   songkoro,
 }) => {
   return (
     <StaticRouter location={requestUrl}>
-      <SongkoroProvider songkoro={songkoro}>
-        <Universal />
-      </SongkoroProvider>
+      <Provider store={reduxStore}>
+        <SongkoroProvider songkoro={songkoro}>
+          <Universal />
+        </SongkoroProvider>
+      </Provider>
     </StaticRouter>
   );
 };
@@ -23,6 +27,7 @@ const ServerApp: React.FC<ServerAppProps> = ({
 export default ServerApp;
 
 interface ServerAppProps {
+  reduxStore;
   requestUrl: string;
   songkoro: Songkoro;
 }

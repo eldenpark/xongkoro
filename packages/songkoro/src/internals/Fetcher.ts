@@ -1,13 +1,17 @@
 /* eslint-disable no-param-reassign */
 import { SongkoroStore } from '../universal/Songkoro';
 
-export default class Fetcher {
+export default class Fetcher<P> {
   promise: Promise<any>;
 
-  constructor(fetchFunction: FetchFunction, fetchOptions: FetchOptions, store: SongkoroStore) {
+  constructor(
+    fetchFunction: FetchFunction<P>,
+    fetchOptions: FetchOptions<P>,
+    store: SongkoroStore,
+  ) {
     const { cacheKey, fetchParam } = fetchOptions;
     this.promise = new Promise((resolve) => {
-      fetchFunction(fetchParam)
+      fetchFunction(fetchParam || {})
         .then((data) => {
           store[cacheKey] = {
             data,
@@ -25,11 +29,11 @@ export default class Fetcher {
   }
 }
 
-export interface FetchOptions {
+export interface FetchOptions<P> {
   cacheKey: string;
-  fetchParam?: object;
+  fetchParam?: P;
 }
 
-export interface FetchFunction {
-  (fetchParam?: object): Promise<any>;
+export interface FetchFunction<P> {
+  (fetchParam: P | {}): Promise<any>;
 }

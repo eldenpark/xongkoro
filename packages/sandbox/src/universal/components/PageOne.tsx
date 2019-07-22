@@ -2,12 +2,20 @@ import axios from 'axios';
 import { logger } from 'jege';
 import React from 'react';
 import { useFetch } from 'songkoro';
+import { useDispatch, useSelector } from 'react-redux';
 
 const log = logger('[example-react]');
 
-const fetchFunction = async (param = {}) => {
+const fetchFunction = async (param) => {
   log('fetchFunction(): executing with fetchParam: %j', param);
-  const { data } = await axios.get('http://httpbin.org');
+
+  const { data } = await axios.get('http://httpbin.org/get');
+  param.dispatch({
+    payload: {
+      otherInformation: `other-information-${Date.now()}`,
+    },
+    type: 'INCREMENT',
+  });
   return data;
 };
 
@@ -16,15 +24,16 @@ const fetchFunction2 = async () => {
   return data.origin;
 };
 
-const fetchOptions = {
-  cacheKey: 'http://httpbin.org/',
-  fetcherParam: {
-    power: 1,
-  },
-};
-
 const PageOne: React.FC<any> = () => {
-  const result = useFetch(fetchFunction, fetchOptions);
+  const dispatch = useDispatch();
+  const fetchOptions = {
+    cacheKey: 'http://httpbin.org/',
+    fetchParam: {
+      dispatch,
+      power: 1,
+    },
+  };
+  const result = useFetch<FetchFunctionParam>(fetchFunction, fetchOptions);
   const [latestResult, setLatestResult] = React.useState(null);
 
   const handleClickFetch = React.useCallback(() => {
@@ -34,17 +43,42 @@ const PageOne: React.FC<any> = () => {
       });
   }, []);
 
+  const counter = useSelector((state: any) => state.counter);
+  const otherInformation = useSelector((state: any) => state.otherInformation);
+
+  const handleClickDispatch = React.useCallback(() => {
+    dispatch({
+      type: 'INCREMENT',
+    });
+  }, []);
+
   const text = (latestResult || result.data) || '';
 
   return (
     <div>
-      Page One
-      <button
-        onClick={handleClickFetch}
-        type="button"
-      >
-        fetch
-      </button>
+      <p>Page One</p>
+      <div>
+        <button
+          onClick={handleClickFetch}
+          type="button"
+        >
+          fetch
+        </button>
+      </div>
+      <div>
+        <button
+          onClick={handleClickDispatch}
+          type="button"
+        >
+          dispatch (Increment)
+        </button>
+        <p>
+          {`counter: ${counter}`}
+        </p>
+        <p>
+          {`otherInformation: ${otherInformation}`}
+        </p>
+      </div>
       <div>
         {text.length}
       </div>
@@ -53,3 +87,8 @@ const PageOne: React.FC<any> = () => {
 };
 
 export default PageOne;
+
+interface FetchFunctionParam {
+  dispatch;
+  power: number;
+}

@@ -18,7 +18,7 @@ async function doFetch({
   });
 
   try {
-    const data = await fetchFunction(fetchParam);
+    const data = await fetchFunction(fetchParam || {});
     if (mountState.current.isMounted) {
       setResult({
         data,
@@ -35,7 +35,7 @@ async function doFetch({
   }
 }
 
-const useFetch = (fetchFunction: FetchFunction, fetchOptions: FetchOptions) => {
+function useFetch<P>(fetchFunction: FetchFunction<P>, fetchOptions: FetchOptions<P>) {
   const {
     options,
     store,
@@ -82,6 +82,6 @@ const useFetch = (fetchFunction: FetchFunction, fetchOptions: FetchOptions) => {
     error: result.error,
     loading: result.loading || false,
   };
-};
+}
 
 export default useFetch;
