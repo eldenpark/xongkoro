@@ -36,9 +36,10 @@ const makeHtml: MakeHtml<State> = async function makeHtml({
     element,
     renderFunction: renderToString,
   });
-  const preloadedState = reduxStore.getState();
+  const reduxState = reduxStore.getState();
+  const songkoroState = songkoro.getState();
 
-  log('makeHtml(): store', Object.keys(songkoro.store));
+  log('makeHtml(): store', Object.keys(songkoro.state));
   log('makeHtml(): appRootInString length: %s', appRootInString.length);
 
   return `
@@ -50,8 +51,8 @@ const makeHtml: MakeHtml<State> = async function makeHtml({
   <title>songkoro-example</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
   <script>
-    window['__APP_STATE__']=${songkoro.getStoreObject()}
-    window['__REDUX_STATE__']=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+    window['__SONGKORO_STATE__']=${JSON.stringify(songkoroState).replace(/</g, '\\u003c')}
+    window['__REDUX_STATE__']=${JSON.stringify(reduxState).replace(/</g, '\\u003c')}
   </script>
 </head>
 <body>

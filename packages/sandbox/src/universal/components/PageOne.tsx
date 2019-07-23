@@ -33,13 +33,13 @@ const PageOne: React.FC<any> = () => {
       power: 1,
     },
   };
-  const result = useFetch<FetchFunctionParam>(fetchFunction, fetchOptions);
+  const { data = {} } = useFetch<FetchFunctionParam>(fetchFunction, fetchOptions);
   const [latestResult, setLatestResult] = React.useState(null);
 
   const handleClickFetch = React.useCallback(() => {
     fetchFunction2()
-      .then((data) => {
-        setLatestResult(data);
+      .then((_data) => {
+        setLatestResult(_data);
       });
   }, []);
 
@@ -52,7 +52,7 @@ const PageOne: React.FC<any> = () => {
     });
   }, []);
 
-  const text = (latestResult || result.data) || '';
+  const latestData = latestResult || data;
 
   return (
     <div>
@@ -76,11 +76,11 @@ const PageOne: React.FC<any> = () => {
           {`counter: ${counter}`}
         </p>
         <p>
+          {`axiosData: ${latestData.url}`}
+        </p>
+        <p>
           {`otherInformation: ${otherInformation}`}
         </p>
-      </div>
-      <div>
-        {text.length}
       </div>
     </div>
   );

@@ -4,30 +4,29 @@ export default class Songkoro {
   options: SongkoroOptions = {
     ssr: false,
   };
-  store: SongkoroStore;
+  state: SongkoroState;
 
   constructor({
     constructorSecret,
     options,
-    store,
+    state,
   }) {
     if (constructorSecret !== songkoroConstructorSecret) {
       console.warn('Isomorphic(): Try not to instantiate this using new keyword. Use createIsomorphic() instead'); // eslint-disable-line
     }
 
     this.options = options;
-    this.store = store;
+    this.state = state;
   }
 
-  getStoreObject() {
-    return JSON.stringify(this.store)
-      .replace(/</g, '\\u003c');
+  getState() {
+    return this.state;
   }
 }
 
 export const createSongkoro = ({
+  preloadedState = {},
   ssr = false,
-  store = {},
 }: CreateIsomorphicArgs = {}) => {
   const options = {
     ssr,
@@ -35,11 +34,11 @@ export const createSongkoro = ({
   return new Songkoro({
     constructorSecret: songkoroConstructorSecret,
     options,
-    store,
+    state: preloadedState,
   });
 };
 
-export interface SongkoroStore {
+export interface SongkoroState {
   [cacheKey: string]: {
     data: null | any;
     error?: any;
@@ -47,8 +46,8 @@ export interface SongkoroStore {
 }
 
 interface CreateIsomorphicArgs {
+  preloadedState?: object;
   ssr?: boolean;
-  store?: object;
 }
 
 interface SongkoroOptions {

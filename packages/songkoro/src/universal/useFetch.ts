@@ -38,16 +38,16 @@ async function doFetch({
 function useFetch<P>(fetchFunction: FetchFunction<P>, fetchOptions: FetchOptions<P>) {
   const {
     options,
-    store,
+    state,
   } = useSongkoroContext();
   const ssrManager = React.useContext(SSRManagerContext);
   const { cacheKey, fetchParam } = fetchOptions;
-  const isInCache = cacheKey && store[cacheKey];
+  const isInCache = cacheKey && state[cacheKey];
   const { ssr } = options;
   const ssrInUse = ssr && ssrManager;
 
   const mountState = React.useRef({ isMounted: false });
-  const prefetchedResult = store[cacheKey] || {};
+  const prefetchedResult = state[cacheKey] || {};
   const [result, setResult] = React.useState<any>(prefetchedResult);
 
   React.useEffect(() => {
@@ -65,14 +65,14 @@ function useFetch<P>(fetchFunction: FetchFunction<P>, fetchOptions: FetchOptions
     return () => {
       mountState.current.isMounted = false;
       if (isInCache) {
-        delete store[cacheKey!];
+        delete state[cacheKey!];
       }
     };
   }, []);
 
   if (ssrInUse) {
     if (!isInCache) {
-      const fetcher = new Fetcher(fetchFunction, fetchOptions, store);
+      const fetcher = new Fetcher(fetchFunction, fetchOptions, state);
       ssrManager!.register(fetcher);
     }
   }

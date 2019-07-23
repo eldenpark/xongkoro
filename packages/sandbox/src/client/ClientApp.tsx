@@ -14,7 +14,7 @@ const reduxStore = createStore({
   preloadedState: window['__REDUX_STATE__'],
 });
 const songkoro = createSongkoro({
-  store: window['__APP_STATE__'],
+  preloadedState: window['__SONGKORO_STATE__'],
 });
 
 const ClientApp = () => {
