@@ -35,7 +35,10 @@ async function doFetch({
   }
 }
 
-function useFetch<P>(fetchFunction: FetchFunction<P>, fetchOptions: FetchOptions<P>) {
+function useFetch<FP, D>(
+  fetchFunction: FetchFunction<FP, D>,
+  fetchOptions: FetchOptions<FP>,
+): UseFetchResult<D> {
   const {
     options,
     state,
@@ -80,8 +83,14 @@ function useFetch<P>(fetchFunction: FetchFunction<P>, fetchOptions: FetchOptions
   return {
     data: result.data,
     error: result.error,
-    loading: result.loading || false,
+    loading: result.loading === undefined ? true : result.loading,
   };
 }
 
 export default useFetch;
+
+interface UseFetchResult<D> {
+  data: D,
+  error: any;
+  loading: boolean;
+}

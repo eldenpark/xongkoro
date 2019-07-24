@@ -1,12 +1,12 @@
 /* eslint-disable no-param-reassign */
 import { SongkoroState } from '../universal/Songkoro';
 
-export default class Fetcher<P> {
+export default class Fetcher<FP, D> {
   promise: Promise<any>;
 
   constructor(
-    fetchFunction: FetchFunction<P>,
-    fetchOptions: FetchOptions<P>,
+    fetchFunction: FetchFunction<FP, D>,
+    fetchOptions: FetchOptions<FP>,
     state: SongkoroState,
   ) {
     const { cacheKey, fetchParam } = fetchOptions;
@@ -15,6 +15,7 @@ export default class Fetcher<P> {
         .then((data) => {
           state[cacheKey] = {
             data,
+            loading: false,
           };
           resolve(cacheKey);
         })
@@ -22,6 +23,7 @@ export default class Fetcher<P> {
           state[cacheKey] = {
             data: null,
             error,
+            loading: false,
           };
           resolve(cacheKey);
         });
@@ -34,6 +36,6 @@ export interface FetchOptions<P> {
   fetchParam?: P;
 }
 
-export interface FetchFunction<P> {
-  (fetchParam: P | {}): Promise<any>;
+export interface FetchFunction<FP, D> {
+  (fetchParam: FP | {}): Promise<D>;
 }

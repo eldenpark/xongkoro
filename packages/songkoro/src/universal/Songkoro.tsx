@@ -41,6 +41,7 @@ export const createSongkoro = ({
 export interface SongkoroState {
   [cacheKey: string]: {
     data: null | any;
+    loading: boolean;
     error?: any;
   };
 }

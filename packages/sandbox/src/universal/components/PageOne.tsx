@@ -33,7 +33,7 @@ const PageOne: React.FC<any> = () => {
       power: 1,
     },
   };
-  const { data = {} } = useFetch<FetchFunctionParam>(fetchFunction, fetchOptions);
+  const { data, loading } = useFetch<FetchFunctionParam, HttpBinGet>(fetchFunction, fetchOptions);
   const [latestResult, setLatestResult] = React.useState(null);
 
   const handleClickFetch = React.useCallback(() => {
@@ -72,16 +72,23 @@ const PageOne: React.FC<any> = () => {
         >
           dispatch (Increment)
         </button>
-        <p>
-          {`counter: ${counter}`}
-        </p>
-        <p>
-          {`axiosData: ${latestData.url}`}
-        </p>
-        <p>
-          {`otherInformation: ${otherInformation}`}
-        </p>
       </div>
+      {!loading
+        ? (
+          <div>
+            <p>
+              {`counter: ${counter}`}
+            </p>
+            <p>
+              {`axiosData: ${latestData.url}`}
+            </p>
+            <p>
+              {`otherInformation: ${otherInformation}`}
+            </p>
+          </div>
+        )
+        : <p>loading</p>
+      }
     </div>
   );
 };
@@ -91,4 +98,11 @@ export default PageOne;
 interface FetchFunctionParam {
   dispatch;
   power: number;
+}
+
+interface HttpBinGet {
+  args: any;
+  headers: any;
+  origin: string;
+  url: string;
 }
