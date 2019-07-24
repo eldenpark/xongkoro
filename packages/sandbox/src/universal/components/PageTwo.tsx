@@ -20,13 +20,18 @@ const fetchFunction = async (param) => {
   return data;
 };
 
-const songkoroRendered = ({
+const SongkoroRendered = ({
   data,
+  extraProps,
 }: {
   data: HttpBinGet;
+  extraProps: { foo: number };
 }) => {
   return (
-    <div>{data.url}</div>
+    <div>
+      <p>{`data: ${data.url}`}</p>
+      <p>{`extraProps.foo: ${extraProps.foo}`}</p>
+    </div>
   );
 };
 
@@ -49,10 +54,11 @@ const PageTwo: React.FC<any> = () => {
   return (
     <div>
       <p>Page Two</p>
-      <SongkoroFetch<FetchParam, HttpBinGet>
+      <SongkoroFetch<HttpBinGet, FetchParam, ExtraProps>
+        extraProps={{ foo: 33 }}
         fetchFunction={fetchFunction}
         fetchOptions={fetchOptions}
-        renderData={songkoroRendered}
+        renderData={SongkoroRendered}
         renderLoading={Loading}
       />
     </div>
@@ -71,4 +77,8 @@ interface HttpBinGet {
   headers: any;
   origin: string;
   url: string;
+}
+
+interface ExtraProps {
+  foo: number;
 }
