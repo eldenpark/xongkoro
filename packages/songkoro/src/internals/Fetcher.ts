@@ -31,11 +31,11 @@ export default class Fetcher<D, FP> {
   }
 }
 
-export interface FetchOptions<P> {
+export interface FetchOptions<FP> {
   cacheKey: string;
-  fetchParam?: P;
+  fetchParam?: FP;
 }
 
-export interface FetchFunction<FP, D> {
+export interface FetchFunction<D, FP> {
   (fetchParam: FP | {}): Promise<D>;
 }

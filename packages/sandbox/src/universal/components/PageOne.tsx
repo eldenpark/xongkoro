@@ -16,7 +16,7 @@ const fetchFunction = async (param) => {
     },
     type: 'INCREMENT',
   });
-  return data;
+  return data as HttpBinGet;
 };
 
 const fetchFunction2 = async () => {
@@ -33,7 +33,7 @@ const PageOne: React.FC<any> = () => {
       power: 1,
     },
   };
-  const { data, loading } = useFetch<FetchFunctionParam, HttpBinGet>(fetchFunction, fetchOptions);
+  const { data, loading } = useFetch<HttpBinGet, FetchFunctionParam>(fetchFunction, fetchOptions);
   const [latestResult, setLatestResult] = React.useState(null);
 
   const handleClickFetch = React.useCallback(() => {
