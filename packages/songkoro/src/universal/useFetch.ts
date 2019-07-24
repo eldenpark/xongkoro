@@ -35,8 +35,12 @@ async function doFetch({
   }
 }
 
-function useFetch<FP, D>(
-  fetchFunction: FetchFunction<FP, D>,
+/**
+ * @param D data
+ * @param FP fetch param
+ */
+function useFetch<D, FP>(
+  fetchFunction: FetchFunction<D, FP>,
   fetchOptions: FetchOptions<FP>,
 ): UseFetchResult<D> {
   const {

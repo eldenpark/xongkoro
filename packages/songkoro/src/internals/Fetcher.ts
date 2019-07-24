@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { SongkoroState } from '../universal/Songkoro';
 
-export default class Fetcher<FP, D> {
+export default class Fetcher<D, FP> {
   promise: Promise<any>;
 
   constructor(
-    fetchFunction: FetchFunction<FP, D>,
+    fetchFunction: FetchFunction<D, FP>,
     fetchOptions: FetchOptions<FP>,
     state: SongkoroState,
   ) {

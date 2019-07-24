@@ -4,7 +4,8 @@ import { Route, Switch } from 'react-router-dom';
 
 import Header from '@@universal/components/Header';
 import PageDefault from '@@universal/components/PageDefault';
-import Page1 from '@@universal/components/PageOne';
+import PageOne from '@@universal/components/PageOne';
+import PageTwo from '@@universal/components/PageTwo';
 
 const log = logger('[sandbox]');
 
@@ -21,8 +22,12 @@ const Universal: React.FC<{}> = () => {
       <div className="page">
         <Switch>
           <Route
-            component={Page1}
-            path="/page1"
+            component={PageOne}
+            path="/pageOne"
+          />
+          <Route
+            component={PageTwo}
+            path="/pageTwo"
           />
           <Route
             component={PageDefault}
