@@ -10,7 +10,7 @@ const DefaultLoading = () => (
   <div>loading...</div>
 );
 
-function SongkoroFetch<D, FP, EP>({
+function SongkoroFetch<D, FP = any, EP = any>({
   extraProps,
   fetchFunction,
   fetchOptions,
