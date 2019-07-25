@@ -11,7 +11,7 @@
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4",
-    "songkoro": "^0.6.0"
+    "songkoro": "^0.6.1"
   },
   "devDependencies": {
     "@babel/register": "^7.4.4",
@@ -33,5 +33,5 @@
   "license": "ISC",
   "name": "sandbox",
   "private": true,
-  "version": "0.6.0"
+  "version": "0.6.1"
 }
