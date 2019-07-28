@@ -12,11 +12,12 @@ function SongkoroFetch<D, FP = any, EP = any>({
   fetchOptions,
   renderData: Data,
 }: SongkoroFetchProps<D, FP, EP>): React.ReactElement<SongkoroFetchProps<D, FP, EP>> {
-  const { data, loading } = useFetch(fetchFunction, fetchOptions);
+  const { data, error, loading } = useFetch<D, FP>(fetchFunction, fetchOptions);
 
   return (
     <Data
       data={data}
+      error={error}
       extraProps={extraProps}
       loading={loading}
     />
@@ -25,15 +26,16 @@ function SongkoroFetch<D, FP = any, EP = any>({
 
 export default SongkoroFetch;
 
+export interface RenderDataProps<D, EP = any> {
+  data: D;
+  error?: any;
+  extraProps?: EP;
+  loading: boolean;
+}
+
 interface SongkoroFetchProps<D, FP, EP> {
   extraProps?: EP;
   fetchFunction: FetchFunction<D, FP>;
   fetchOptions: FetchOptions<FP>;
   renderData: React.ComponentType<RenderDataProps<D, EP>>;
-}
-
-interface RenderDataProps<D, EP> {
-  data: D;
-  extraProps?: EP;
-  loading: boolean;
 }

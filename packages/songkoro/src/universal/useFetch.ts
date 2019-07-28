@@ -55,7 +55,7 @@ function useFetch<D, FP>(
 
   const mountState = React.useRef({ isMounted: false });
   const prefetchedResult = state[cacheKey] || {};
-  const [result, setResult] = React.useState<any>(prefetchedResult);
+  const [result, setResult] = React.useState<PrefetchedResult<D>>(prefetchedResult);
 
   React.useEffect(() => {
     mountState.current.isMounted = true;
@@ -95,6 +95,12 @@ export default useFetch;
 
 interface UseFetchResult<D> {
   data: D,
-  error: any;
+  error: boolean;
+  loading: boolean;
+}
+
+interface PrefetchedResult<D> {
+  data: D;
+  error?: any;
   loading: boolean;
 }
