@@ -6,22 +6,21 @@ import {
 } from '../internals/Fetcher';
 import useFetch from './useFetch';
 
-const DefaultLoading = () => (
-  <div>loading...</div>
-);
-
 function SongkoroFetch<D, FP = any, EP = any>({
   extraProps,
   fetchFunction,
   fetchOptions,
   renderData: Data,
-  renderLoading: Loading = DefaultLoading,
 }: SongkoroFetchProps<D, FP, EP>): React.ReactElement<SongkoroFetchProps<D, FP, EP>> {
   const { data, loading } = useFetch(fetchFunction, fetchOptions);
 
-  return !loading
-    ? <Data data={data} extraProps={extraProps} />
-    : <Loading />;
+  return (
+    <Data
+      data={data}
+      extraProps={extraProps}
+      loading={loading}
+    />
+  );
 }
 
 export default SongkoroFetch;
@@ -31,10 +30,10 @@ interface SongkoroFetchProps<D, FP, EP> {
   fetchFunction: FetchFunction<D, FP>;
   fetchOptions: FetchOptions<FP>;
   renderData: React.ComponentType<RenderDataProps<D, EP>>;
-  renderLoading?: React.ComponentType;
 }
 
 interface RenderDataProps<D, EP> {
   data: D;
   extraProps?: EP;
+  loading: boolean;
 }

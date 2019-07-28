@@ -23,22 +23,22 @@ const fetchFunction = async (param) => {
 const SongkoroRendered = ({
   data,
   extraProps,
+  loading,
 }: {
   data: HttpBinGet;
   extraProps: { foo: number };
+  loading: boolean;
 }) => {
-  return (
-    <div>
-      <p>{`data: ${data.url}`}</p>
-      <p>{`extraProps.foo: ${extraProps.foo}`}</p>
-    </div>
-  );
-};
-
-const Loading = () => {
-  return (
-    <div>loading...</div>
-  );
+  return !loading
+    ? (
+      <div>
+        <p>{`data: ${data.url}`}</p>
+        <p>{`extraProps.foo: ${extraProps.foo}`}</p>
+      </div>
+    )
+    : (
+      <div>loading...</div>
+    );
 };
 
 const PageTwo: React.FC<any> = () => {
@@ -59,7 +59,6 @@ const PageTwo: React.FC<any> = () => {
         fetchFunction={fetchFunction}
         fetchOptions={fetchOptions}
         renderData={SongkoroRendered}
-        renderLoading={Loading}
       />
     </div>
   );
