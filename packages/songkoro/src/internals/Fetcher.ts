@@ -11,10 +11,10 @@ export default class Fetcher<D, FP> {
   ) {
     const { cacheKey, fetchParam } = fetchOptions;
     this.promise = new Promise((resolve) => {
-      const fetchFunctionBody = fetchFunction();
+      const fetchFunctionBody = fetchFunction(fetchParam || {});
 
       if (typeof fetchFunctionBody === 'function') {
-        fetchFunctionBody(fetchParam || {})
+        fetchFunctionBody()
           .then((data) => {
             state[cacheKey] = {
               data,
@@ -43,5 +43,5 @@ export interface FetchOptions<FP> {
 }
 
 export interface FetchFunction<D, FP> {
-  (): (fetchParam: FP | {}) => Promise<D>;
+  (fetchParam: FP | {}): () => Promise<D>;
 }

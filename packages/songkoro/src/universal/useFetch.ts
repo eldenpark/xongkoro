@@ -13,7 +13,7 @@ async function doFetch<D, FP>({
   mountState,
   setResult,
 }: DoFetchArgs<D, FP>) {
-  const fetchFunctionBody = fetchFunction();
+  const fetchFunctionBody = fetchFunction(fetchParam || {});
 
   if (typeof fetchFunctionBody === 'function') {
     setResult({
@@ -21,7 +21,7 @@ async function doFetch<D, FP>({
     });
 
     try {
-      const data = await fetchFunctionBody(fetchParam || {});
+      const data = await fetchFunctionBody();
       if (mountState.current.isMounted) {
         setResult({
           data,

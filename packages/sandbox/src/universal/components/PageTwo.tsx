@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 const log = logger('[example-react]');
 
-const fetchFunction = () => async (param) => {
+const fetchFunction = (param) => async () => {
   log('fetchFunction(): executing with fetchParam: %j', param);
 
   const { data } = await axios.get('http://httpbin.org/get');

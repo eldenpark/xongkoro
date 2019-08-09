@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const log = logger('[example-react]');
 
-const fetchFunction = () => async (param) => {
+const fetchFunction = (param) => async () => {
   log('fetchFunction(): executing with fetchParam: %j', param);
 
   const { data } = await axios.get('http://httpbin.org/get');
@@ -19,8 +19,16 @@ const fetchFunction = () => async (param) => {
   return data as HttpBinGet;
 };
 
-const fetchFunction2 = () => async () => {
+const fetchFunction2 = (dispatch) => async () => {
   const { data } = await axios.get('http://httpbin.org/get');
+
+  dispatch({
+    payload: {
+      otherInformation: `other-information-${Date.now()}`,
+    },
+    type: 'INCREMENT',
+  });
+
   return data;
 };
 
@@ -37,7 +45,7 @@ const PageOne: React.FC<any> = () => {
   const [latestResult, setLatestResult] = React.useState(null);
 
   const handleClickFetch = React.useCallback(() => {
-    fetchFunction2()()
+    fetchFunction2(dispatch)()
       .then((_data) => {
         setLatestResult(_data);
       });
