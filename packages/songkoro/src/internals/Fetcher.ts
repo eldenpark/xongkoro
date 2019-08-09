@@ -43,5 +43,7 @@ export interface FetchOptions<FP> {
 }
 
 export interface FetchFunction<D, FP> {
-  (fetchParam: FP | {}): () => Promise<D>;
+  (fetchParam: FP | {}): FetchFunctionBody<D> | any;
 }
+
+type FetchFunctionBody<D> = () => Promise<D>;

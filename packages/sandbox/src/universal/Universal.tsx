@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Header from '@@universal/components/Header';
 import PageDefault from '@@universal/components/PageDefault';
 import PageOne from '@@universal/components/PageOne';
+import PageThree from '@@universal/components/PageThree';
 import PageTwo from '@@universal/components/PageTwo';
 
 const log = logger('[sandbox]');
@@ -28,6 +29,10 @@ const Universal: React.FC<{}> = () => {
           <Route
             component={PageTwo}
             path="/pageTwo"
+          />
+          <Route
+            component={PageThree}
+            path="/pageThree"
           />
           <Route
             component={PageDefault}

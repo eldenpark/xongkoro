@@ -38,6 +38,7 @@ async function doFetch<D, FP>({
     }
   } else {
     setResult({
+      data: fetchFunctionBody,
       loading: false,
     });
   }
