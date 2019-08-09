@@ -1,6 +1,6 @@
 {
   "author": "Elden S. Park",
-  "description": "Monorepo for songkoro",
+  "description": "Monorepo for xongkoro",
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",

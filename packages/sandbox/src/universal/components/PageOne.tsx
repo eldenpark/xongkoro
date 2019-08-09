@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { logger } from 'jege';
 import React from 'react';
-import { useFetch } from 'songkoro';
+import { useFetch } from 'xongkoro';
 import { useDispatch, useSelector } from 'react-redux';
 
 const log = logger('[example-react]');

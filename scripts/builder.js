@@ -3,20 +3,20 @@ const { createLauncher, proc } = require('process-launch');
 const { logger } = require('jege/server');
 
 const cwd = process.cwd();
-const log = logger('[monorepo-songkoro]');
+const log = logger('[monorepo-xongkoro]');
 
 const buildOrder = [
-  'songkoro',
+  'xongkoro',
 ];
 
 const processDefinitions = {
-  songkoro: proc(
+  xongkoro: proc(
     'node',
     [
       './scripts/build.js',
     ],
     {
-      cwd: './packages/songkoro',
+      cwd: './packages/xongkoro',
       stdio: 'inherit',
     },
   ),

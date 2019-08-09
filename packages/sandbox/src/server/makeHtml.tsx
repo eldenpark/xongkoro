@@ -1,4 +1,4 @@
-import { createSongkoro } from 'songkoro';
+import { createXongkoro } from 'xongkoro';
 import { createStore } from '@@universal/state';
 import {
   MakeHtml,
@@ -6,7 +6,7 @@ import {
 import { logger } from 'jege/server';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { renderToStringProxy } from 'songkoro/server';
+import { renderToStringProxy } from 'xongkoro/server';
 
 import ServerApp from './ServerApp';
 import State from './State';
@@ -21,12 +21,12 @@ const makeHtml: MakeHtml<State> = async function makeHtml({
 
   const { socketPath, socketPort, state } = serverState;
   const reduxStore = createStore();
-  const songkoro = createSongkoro({
+  const xongkoro = createXongkoro({
     ssr: true,
   });
   const element = (
     <ServerApp
-      songkoro={songkoro}
+      xongkoro={xongkoro}
       reduxStore={reduxStore}
       requestUrl={requestUrl}
     />
@@ -37,9 +37,9 @@ const makeHtml: MakeHtml<State> = async function makeHtml({
     renderFunction: renderToString,
   });
   const reduxState = reduxStore.getState();
-  const songkoroState = songkoro.getState();
+  const xongkoroState = xongkoro.getState();
 
-  log('makeHtml(): store', Object.keys(songkoro.state));
+  log('makeHtml(): store', Object.keys(xongkoro.state));
   log('makeHtml(): appRootInString length: %s', appRootInString.length);
 
   return `
@@ -48,10 +48,10 @@ const makeHtml: MakeHtml<State> = async function makeHtml({
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
-  <title>songkoro-example</title>
+  <title>xongkoro-example</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
   <script>
-    window['__SONGKORO_STATE__']=${JSON.stringify(songkoroState).replace(/</g, '\\u003c')}
+    window['__XONGKORO_STATE__']=${JSON.stringify(xongkoroState).replace(/</g, '\\u003c')}
     window['__REDUX_STATE__']=${JSON.stringify(reduxState).replace(/</g, '\\u003c')}
   </script>
 </head>

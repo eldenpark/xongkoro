@@ -5,7 +5,7 @@ import { SSRManager, SSRManagerContext } from '../internals/SSRManager';
 
 const MAXIMUM_CALL_COUNT = 10;
 
-const log = logger('[songkoro]');
+const log = logger('[xongkoro]');
 
 export async function renderToStringProxy({
   element,

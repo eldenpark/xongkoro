@@ -6,12 +6,12 @@ import {
 } from '../internals/Fetcher';
 import useFetch from './useFetch';
 
-function SongkoroFetch<D, FP = any, EP = any>({
+function XongkoroFetch<D, FP = any, EP = any>({
   extraProps,
   fetchFunction,
   fetchOptions,
   renderData: Data,
-}: SongkoroFetchProps<D, FP, EP>): React.ReactElement<SongkoroFetchProps<D, FP, EP>> {
+}: XongkoroFetchProps<D, FP, EP>): React.ReactElement<XongkoroFetchProps<D, FP, EP>> {
   const { data, error, loading } = useFetch<D, FP>(fetchFunction, fetchOptions);
 
   return (
@@ -24,7 +24,7 @@ function SongkoroFetch<D, FP = any, EP = any>({
   );
 }
 
-export default SongkoroFetch;
+export default XongkoroFetch;
 
 export interface RenderDataProps<D, EP = any> {
   data: D;
@@ -33,7 +33,7 @@ export interface RenderDataProps<D, EP = any> {
   loading: boolean;
 }
 
-interface SongkoroFetchProps<D, FP, EP> {
+interface XongkoroFetchProps<D, FP, EP> {
   extraProps?: EP;
   fetchFunction: FetchFunction<D, FP>;
   fetchOptions: FetchOptions<FP>;

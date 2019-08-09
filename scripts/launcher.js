@@ -3,7 +3,7 @@ const { createLauncher, proc } = require('process-launch');
 const { logger } = require('jege/server');
 
 const cwd = process.cwd();
-const log = logger('[monorepo-songkoro]');
+const log = logger('[monorepo-xongkoro]');
 
 const processDefinitions = {
   sandbox: proc(

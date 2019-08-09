@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { SongkoroState } from '../universal/Songkoro';
+import { XongkoroState } from '../universal/Xongkoro';
 
 export default class Fetcher<D, FP> {
   promise: Promise<any>;
@@ -7,7 +7,7 @@ export default class Fetcher<D, FP> {
   constructor(
     fetchFunction: FetchFunction<D, FP>,
     fetchOptions: FetchOptions<FP>,
-    state: SongkoroState,
+    state: XongkoroState,
   ) {
     const { cacheKey, fetchParam } = fetchOptions;
     this.promise = new Promise((resolve) => {

@@ -5,7 +5,7 @@ import Fetcher, {
   FetchOptions,
 } from '../internals/Fetcher';
 import { SSRManagerContext } from '../internals/SSRManager';
-import { useSongkoroContext } from './SongkoroContext';
+import { useXongkoroContext } from './XongkoroContext';
 
 async function doFetch<D, FP>({
   fetchFunction,
@@ -55,7 +55,7 @@ function useFetch<D, FP>(
   const {
     options,
     state,
-  } = useSongkoroContext();
+  } = useXongkoroContext();
   const ssrManager = React.useContext(SSRManagerContext);
   const { cacheKey, fetchParam } = fetchOptions;
   const isInCache = cacheKey && state[cacheKey];

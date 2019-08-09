@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { logger } from 'jege';
 import React from 'react';
-import { SongkoroFetch, RenderDataProps } from 'songkoro';
+import { XongkoroFetch, RenderDataProps } from 'xongkoro';
 
 const log = logger('[example-react]');
 
@@ -12,7 +12,7 @@ const fetchFunction = () => {
   };
 };
 
-const SongkoroRendered = ({
+const XongkoroRendered = ({
   data,
   loading,
 }) => {
@@ -35,10 +35,10 @@ const PageTwo: React.FC<any> = () => {
   return (
     <div>
       <p>Page Two</p>
-      <SongkoroFetch<any, FetchParam>
+      <XongkoroFetch<any, FetchParam>
         fetchFunction={fetchFunction}
         fetchOptions={fetchOptions}
-        renderData={SongkoroRendered}
+        renderData={XongkoroRendered}
       />
     </div>
   );
@@ -62,4 +62,4 @@ interface ExtraProps {
   foo: number;
 }
 
-type SongkoroFetchRenderedProps = RenderDataProps<HttpBinGet, { foo: number; }>;
+type XongkoroFetchRenderedProps = RenderDataProps<HttpBinGet, { foo: number; }>;

@@ -1,17 +1,17 @@
-const songkoroConstructorSecret = Symbol('songkoroConstructorSecret');
+const xongkoroConstructorSecret = Symbol('xongkoroConstructorSecret');
 
-export default class Songkoro {
-  options: SongkoroOptions = {
+export default class Xongkoro {
+  options: XongkoroOptions = {
     ssr: false,
   };
-  state: SongkoroState;
+  state: XongkoroState;
 
   constructor({
     constructorSecret,
     options,
     state,
   }) {
-    if (constructorSecret !== songkoroConstructorSecret) {
+    if (constructorSecret !== xongkoroConstructorSecret) {
       console.warn('Isomorphic(): Try not to instantiate this using new keyword. Use createIsomorphic() instead'); // eslint-disable-line
     }
 
@@ -24,21 +24,21 @@ export default class Songkoro {
   }
 }
 
-export const createSongkoro = ({
+export const createXongkoro = ({
   preloadedState = {},
   ssr = false,
 }: CreateIsomorphicArgs = {}) => {
   const options = {
     ssr,
   };
-  return new Songkoro({
-    constructorSecret: songkoroConstructorSecret,
+  return new Xongkoro({
+    constructorSecret: xongkoroConstructorSecret,
     options,
     state: preloadedState,
   });
 };
 
-export interface SongkoroState {
+export interface XongkoroState {
   [cacheKey: string]: {
     data: null | any;
     error?: any;
@@ -51,6 +51,6 @@ interface CreateIsomorphicArgs {
   ssr?: boolean;
 }
 
-interface SongkoroOptions {
+interface XongkoroOptions {
   ssr: boolean;
 }

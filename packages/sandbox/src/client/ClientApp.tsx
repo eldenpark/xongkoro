@@ -1,9 +1,9 @@
 import { BrowserRouter } from 'react-router-dom';
 import { createStore } from '@@universal/state';
 import {
-  createSongkoro,
-  SongkoroProvider,
-} from 'songkoro';
+  createXongkoro,
+  XongkoroProvider,
+} from 'xongkoro';
 import { hot } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import * as React from 'react';
@@ -13,17 +13,17 @@ import Universal from '../universal/Universal';
 const reduxStore = createStore({
   preloadedState: window['__REDUX_STATE__'],
 });
-const songkoro = createSongkoro({
-  preloadedState: window['__SONGKORO_STATE__'],
+const xongkoro = createXongkoro({
+  preloadedState: window['__XONGKORO_STATE__'],
 });
 
 const ClientApp = () => {
   return (
     <BrowserRouter>
       <Provider store={reduxStore}>
-        <SongkoroProvider songkoro={songkoro}>
+        <XongkoroProvider xongkoro={xongkoro}>
           <Universal />
-        </SongkoroProvider>
+        </XongkoroProvider>
       </Provider>
     </BrowserRouter>
   );

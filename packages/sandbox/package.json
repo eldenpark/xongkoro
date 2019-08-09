@@ -11,7 +11,7 @@
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4",
-    "songkoro": "^0.8.2"
+    "xongkoro": "^0.8.3"
   },
   "devDependencies": {
     "@babel/register": "^7.4.4",

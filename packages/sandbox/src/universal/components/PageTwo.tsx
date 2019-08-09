@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Dispatch } from 'redux';
 import { logger } from 'jege';
 import React from 'react';
-import { SongkoroFetch, RenderDataProps } from 'songkoro';
+import { XongkoroFetch, RenderDataProps } from 'xongkoro';
 import { useDispatch } from 'react-redux';
 
 const log = logger('[example-react]');
@@ -20,7 +20,7 @@ const fetchFunction = (param) => async () => {
   return data;
 };
 
-const SongkoroRendered: React.FC<SongkoroFetchRenderedProps> = ({
+const XongkoroRendered: React.FC<XongkoroFetchRenderedProps> = ({
   data,
   extraProps,
   loading,
@@ -50,11 +50,11 @@ const PageTwo: React.FC<any> = () => {
   return (
     <div>
       <p>Page Two</p>
-      <SongkoroFetch<HttpBinGet, FetchParam, ExtraProps>
+      <XongkoroFetch<HttpBinGet, FetchParam, ExtraProps>
         extraProps={{ foo: 33 }}
         fetchFunction={fetchFunction}
         fetchOptions={fetchOptions}
-        renderData={SongkoroRendered}
+        renderData={XongkoroRendered}
       />
     </div>
   );
@@ -78,4 +78,4 @@ interface ExtraProps {
   foo: number;
 }
 
-type SongkoroFetchRenderedProps = RenderDataProps<HttpBinGet, { foo: number; }>;
+type XongkoroFetchRenderedProps = RenderDataProps<HttpBinGet, { foo: number; }>;

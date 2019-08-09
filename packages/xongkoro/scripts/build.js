@@ -7,7 +7,7 @@ const ts = require('gulp-typescript');
 
 const tsConfig = require('../tsconfig.json');
 
-const log = buildLogger('[songkoro]');
+const log = buildLogger('[xongkoro]');
 const paths = {
   lib: path.resolve(__dirname, '../lib'),
   src: path.resolve(__dirname, '../src'),
