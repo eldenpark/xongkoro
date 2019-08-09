@@ -1,42 +1,33 @@
 const { argv } = require('yargs');
-const childProcess = require('child_process');
-const fs = require('fs');
+const { createLauncher, proc } = require('process-launch');
 const { logger } = require('jege/server');
-const path = require('path');
 
-const { requireNonNull } = require('./scriptUtils');
-
+const cwd = process.cwd();
 const log = logger('[monorepo-songkoro]');
+
+const processDefinitions = {
+  sandbox: proc(
+    'node',
+    [
+      './scripts/launch.js',
+    ],
+    {
+      cwd: './packages/sandbox',
+      stdio: 'inherit',
+    },
+  ),
+};
 
 function launcher() {
   try {
-    log('launcher(): argv: %j', argv);
+    log('launcher(): argv: %j, cwd: %s', argv, cwd);
 
-    requireNonNull(argv.p, 'You should provide "-p" with package name');
+    const Launcher = createLauncher({
+      processDefinitions,
+    });
 
-    const cwdForLaunch = path.resolve(__dirname, '../packages', argv.p);
-    const launchFileRelativePath = './scripts/launch.js';
-    const launchFilePath = path.resolve(cwdForLaunch, launchFileRelativePath);
-    log('launcher(): launchFilePath: %s, cwdForLaunch: %s', launchFilePath, cwdForLaunch);
-
-    if (!fs.existsSync(launchFilePath)) {
-      throw new Error('launch file does not exist');
-    }
-
-    const launch = childProcess.spawn(
-      'node',
-      [
-        './scripts/launch.js',
-        ...argv._,
-      ],
-      {
-        cwd: `./packages/${argv.p}`,
-        stdio: 'inherit',
-      },
-    );
-
-    launch.on('error', (err) => {
-      log('launcher(): error in process: $s, error: $o', argv.p, err);
+    Launcher.run({
+      process: argv.process,
     });
   } catch (err) {
     log('launcher(): Error reading file', err);

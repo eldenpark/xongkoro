@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 const log = logger('[example-react]');
 
-const fetchFunction = async (param) => {
+const fetchFunction = () => async (param) => {
   log('fetchFunction(): executing with fetchParam: %j', param);
 
   const { data } = await axios.get('http://httpbin.org/get');
@@ -25,7 +25,7 @@ const SongkoroRendered: React.FC<SongkoroFetchRenderedProps> = ({
   extraProps,
   loading,
 }) => {
-  return !loading
+  return !loading && data
     ? (
       <div>
         <p>{`data: ${data.url}`}</p>

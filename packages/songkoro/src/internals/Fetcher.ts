@@ -11,22 +11,28 @@ export default class Fetcher<D, FP> {
   ) {
     const { cacheKey, fetchParam } = fetchOptions;
     this.promise = new Promise((resolve) => {
-      fetchFunction(fetchParam || {})
-        .then((data) => {
-          state[cacheKey] = {
-            data,
-            loading: false,
-          };
-          resolve(cacheKey);
-        })
-        .catch((error) => {
-          state[cacheKey] = {
-            data: null,
-            error,
-            loading: false,
-          };
-          resolve(cacheKey);
-        });
+      const fetchFunctionBody = fetchFunction();
+
+      if (typeof fetchFunctionBody === 'function') {
+        fetchFunctionBody(fetchParam || {})
+          .then((data) => {
+            state[cacheKey] = {
+              data,
+              loading: false,
+            };
+            resolve(cacheKey);
+          })
+          .catch((error) => {
+            state[cacheKey] = {
+              data: null,
+              error,
+              loading: false,
+            };
+            resolve(cacheKey);
+          });
+      } else {
+        resolve();
+      }
     });
   }
 }
@@ -37,5 +43,5 @@ export interface FetchOptions<FP> {
 }
 
 export interface FetchFunction<D, FP> {
-  (fetchParam: FP | {}): Promise<D>;
+  (): (fetchParam: FP | {}) => Promise<D>;
 }
