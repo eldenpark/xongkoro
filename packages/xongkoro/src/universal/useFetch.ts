@@ -7,13 +7,14 @@ import Fetcher, {
 import { SSRManagerContext } from '../internals/SSRManager';
 import { useXongkoroContext } from './XongkoroContext';
 
-async function doFetch<D, FP>({
+async function doFetch<D, FP, C>({
+  context,
   fetchFunction,
   fetchParam,
   mountState,
   setResult,
-}: DoFetchArgs<D, FP>) {
-  const fetchFunctionBody = fetchFunction(fetchParam || {});
+}: DoFetchArgs<D, FP, C>) {
+  const fetchFunctionBody = fetchFunction(fetchParam || {}, context);
 
   if (typeof fetchFunctionBody === 'function') {
     setResult({
@@ -48,11 +49,12 @@ async function doFetch<D, FP>({
  * @param D data
  * @param FP fetch param
  */
-function useFetch<D, FP>(
-  fetchFunction: FetchFunction<D, FP>,
+function useFetch<D, FP, C = any>(
+  fetchFunction: FetchFunction<D, FP, C>,
   fetchOptions: FetchOptions<FP>,
 ): UseFetchResult<D> {
   const {
+    context,
     options,
     state,
   } = useXongkoroContext();
@@ -71,6 +73,7 @@ function useFetch<D, FP>(
 
     if (!isInCache) {
       doFetch({
+        context,
         fetchFunction,
         fetchParam,
         mountState,
@@ -88,7 +91,7 @@ function useFetch<D, FP>(
 
   if (ssrInUse) {
     if (!isInCache) {
-      const fetcher = new Fetcher(fetchFunction, fetchOptions, state);
+      const fetcher = new Fetcher(fetchFunction, fetchOptions, state, context);
       ssrManager!.register(fetcher);
     }
   }
@@ -114,8 +117,9 @@ interface PrefetchedResult<D> {
   loading: boolean;
 }
 
-interface DoFetchArgs<D, FP> {
-  fetchFunction: FetchFunction<D, FP>;
+interface DoFetchArgs<D, FP, C> {
+  context: C;
+  fetchFunction: FetchFunction<D, FP, C>;
   fetchParam?: FP;
   mountState: {
     current: {

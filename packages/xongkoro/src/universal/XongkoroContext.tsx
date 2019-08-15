@@ -2,7 +2,7 @@ import React from 'react';
 
 import Xongkoro from './Xongkoro';
 
-const XongkoroContext = React.createContext<Xongkoro | null>(null);
+const XongkoroContext = React.createContext<Xongkoro<any> | null>(null);
 
 export default XongkoroContext;
 
@@ -18,15 +18,15 @@ export const XongkoroProvider: React.FC<IsomorphicProviderProps> = ({
 };
 
 export function useXongkoroContext() {
-  const isomorphic = React.useContext(XongkoroContext);
+  const xongkoro = React.useContext(XongkoroContext);
 
-  if (!isomorphic) {
-    throw new Error('Isomorphic is not provided. Did you use <IsomorphicProvider />?');
+  if (!xongkoro) {
+    throw new Error('Xongkoro is not provided. Did you use <XongkoroProvider />?');
   }
 
-  return isomorphic;
+  return xongkoro;
 }
 
 interface IsomorphicProviderProps {
-  xongkoro: Xongkoro;
+  xongkoro: Xongkoro<any>;
 }

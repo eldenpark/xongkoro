@@ -16,7 +16,7 @@ export class SSRManager {
     return this.promiseSet.size > 0;
   }
 
-  register<FP, D>(fetcher: Fetcher<FP, D>) {
+  register<FP, D, C>(fetcher: Fetcher<FP, D, C>) {
     this.promiseSet.add(fetcher.promise);
   }
 }

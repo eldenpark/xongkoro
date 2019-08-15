@@ -1,6 +1,7 @@
 const xongkoroConstructorSecret = Symbol('xongkoroConstructorSecret');
 
-export default class Xongkoro {
+export default class Xongkoro<C> {
+  context: C;
   options: XongkoroOptions = {
     ssr: false,
   };
@@ -8,6 +9,7 @@ export default class Xongkoro {
 
   constructor({
     constructorSecret,
+    context,
     options,
     state,
   }) {
@@ -15,6 +17,7 @@ export default class Xongkoro {
       console.warn('Isomorphic(): Try not to instantiate this using new keyword. Use createIsomorphic() instead'); // eslint-disable-line
     }
 
+    this.context = context || {};
     this.options = options;
     this.state = state;
   }
@@ -24,15 +27,17 @@ export default class Xongkoro {
   }
 }
 
-export const createXongkoro = ({
+export const createXongkoro = <C extends object>({
+  context,
   preloadedState = {},
   ssr = false,
-}: CreateIsomorphicArgs = {}) => {
+}: CreateXongkoroArgs<C> = {}) => {
   const options = {
     ssr,
   };
-  return new Xongkoro({
+  return new Xongkoro<C>({
     constructorSecret: xongkoroConstructorSecret,
+    context,
     options,
     state: preloadedState,
   });
@@ -46,7 +51,8 @@ export interface XongkoroState {
   };
 }
 
-interface CreateIsomorphicArgs {
+interface CreateXongkoroArgs<C> {
+  context?: C;
   preloadedState?: object;
   ssr?: boolean;
 }

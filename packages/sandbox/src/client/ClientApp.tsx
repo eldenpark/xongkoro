@@ -14,6 +14,9 @@ const reduxStore = createStore({
   preloadedState: window['__REDUX_STATE__'],
 });
 const xongkoro = createXongkoro({
+  context: {
+    store: reduxStore,
+  },
   preloadedState: window['__XONGKORO_STATE__'],
 });
 

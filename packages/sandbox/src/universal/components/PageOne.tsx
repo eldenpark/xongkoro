@@ -6,8 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const log = logger('[example-react]');
 
-const fetchFunction = (param) => async () => {
-  log('fetchFunction(): executing with fetchParam: %j', param);
+const fetchFunction = (param, context) => async () => {
+  log('fetchFunction(): executing with fetchParam: %j, context: %o', param, context);
+
+  const { store } = context;
+  store.dispatch({
+    type: 'TEMP_ACTION',
+  });
 
   const { data } = await axios.get('http://httpbin.org/get');
   param.dispatch({
@@ -59,6 +64,8 @@ const PageOne: React.FC<any> = () => {
       type: 'INCREMENT',
     });
   }, []);
+
+  console.log(222, data, loading, counter);
 
   const latestData = latestResult || data;
 

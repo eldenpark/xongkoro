@@ -22,6 +22,9 @@ const makeHtml: MakeHtml<State> = async function makeHtml({
   const { socketPath, socketPort, state } = serverState;
   const reduxStore = createStore();
   const xongkoro = createXongkoro({
+    context: {
+      store: reduxStore,
+    },
     ssr: true,
   });
   const element = (
@@ -39,7 +42,7 @@ const makeHtml: MakeHtml<State> = async function makeHtml({
   const reduxState = reduxStore.getState();
   const xongkoroState = xongkoro.getState();
 
-  log('makeHtml(): store', Object.keys(xongkoro.state));
+  log('makeHtml(): xongkoro state', Object.keys(xongkoro.state));
   log('makeHtml(): appRootInString length: %s', appRootInString.length);
 
   return `

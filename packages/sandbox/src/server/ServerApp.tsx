@@ -29,5 +29,5 @@ export default ServerApp;
 interface ServerAppProps {
   reduxStore;
   requestUrl: string;
-  xongkoro: Xongkoro;
+  xongkoro: Xongkoro<any>;
 }
