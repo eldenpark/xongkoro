@@ -52,6 +52,7 @@ async function doFetch<D, FP, C>({
 function useFetch<D, FP, C = any>(
   fetchFunction: FetchFunction<D, FP, C>,
   fetchOptions: FetchOptions<FP>,
+  deps: any[] = [],
 ): UseFetchResult<D> {
   const {
     context,
@@ -87,7 +88,7 @@ function useFetch<D, FP, C = any>(
         delete state[cacheKey!];
       }
     };
-  }, []);
+  }, deps);
 
   if (ssrInUse) {
     if (!isInCache) {

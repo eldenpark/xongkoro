@@ -65,8 +65,6 @@ const PageOne: React.FC<any> = () => {
     });
   }, []);
 
-  console.log(222, data, loading, counter);
-
   const latestData = latestResult || data;
 
   return (
