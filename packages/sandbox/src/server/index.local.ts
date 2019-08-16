@@ -17,7 +17,7 @@ const paths = {
   public: path.resolve(__dirname, '../../dist/public'),
 };
 
-const log = logger('[example-react]');
+const log = logger('[sandbox]');
 
 const extend: Extend<State> = (app, serverState) => {
   app.use((req: Request, res, next: NextFunction) => {

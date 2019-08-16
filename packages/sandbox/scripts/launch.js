@@ -14,7 +14,7 @@ function launch() {
     const buildTask = gulp.task('build');
 
     buildTask(() => {
-      require('../dist/server/production.js');
+      require('../dist/server/index.production.js');
     });
   } else {
     require('@babel/register')({
@@ -24,7 +24,7 @@ function launch() {
 
     const buildDevTask = gulp.task('build-dev');
     buildDevTask(() => {
-      require('../src/server/local.ts');
+      require('../src/server/index.local.ts');
     });
   }
 }

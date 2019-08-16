@@ -4,7 +4,7 @@ import React from 'react';
 import { useFetch } from 'xongkoro';
 import { useDispatch, useSelector } from 'react-redux';
 
-const log = logger('[example-react]');
+const log = logger('[sandbox]');
 
 const fetchFunction = (param, context) => async () => {
   log('fetchFunction(): executing with fetchParam: %j, context: %o', param, context);

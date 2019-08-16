@@ -3,13 +3,19 @@ import { logger } from 'jege';
 import React from 'react';
 import { XongkoroFetch, RenderDataProps } from 'xongkoro';
 
-const log = logger('[example-react]');
+const log = logger('[sandbox]');
 
 const fetchFunction = () => {
   log('fetchFunction(): executing');
   return {
     a: 3,
   };
+
+  // return async () => {
+  //   return {
+  //     a: 55,
+  //   };
+  // };
 };
 
 const XongkoroRendered = ({
@@ -27,14 +33,14 @@ const XongkoroRendered = ({
     );
 };
 
-const PageTwo: React.FC<any> = () => {
+const PageThree: React.FC<any> = () => {
   const fetchOptions = {
     cacheKey: 'http://httpbin.org/',
   };
 
   return (
     <div>
-      <p>Page Two</p>
+      <p>Page Three</p>
       <XongkoroFetch<any, FetchParam>
         fetchFunction={fetchFunction}
         fetchOptions={fetchOptions}
@@ -44,7 +50,7 @@ const PageTwo: React.FC<any> = () => {
   );
 };
 
-export default PageTwo;
+export default PageThree;
 
 interface FetchParam {
   dispatch: Dispatch;

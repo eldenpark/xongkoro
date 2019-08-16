@@ -13,6 +13,9 @@ const processDefinitions = {
     ],
     {
       cwd: './packages/sandbox',
+      env: {
+        XONGKORO_DEBUG: 'true',
+      },
       stdio: 'inherit',
     },
   ),

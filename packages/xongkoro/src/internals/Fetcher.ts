@@ -12,10 +12,10 @@ export default class Fetcher<D, FP, C> {
   ) {
     const { cacheKey, fetchParam } = fetchOptions;
     this.promise = new Promise((resolve) => {
-      const fetchFunctionBody = fetchFunction(fetchParam || {}, context);
+      const fetchFunctionFirstDegreeResult = fetchFunction(fetchParam || {}, context);
 
-      if (typeof fetchFunctionBody === 'function') {
-        fetchFunctionBody()
+      if (typeof fetchFunctionFirstDegreeResult === 'function') {
+        fetchFunctionFirstDegreeResult()
           .then((data) => {
             state[cacheKey] = {
               data,
@@ -32,7 +32,11 @@ export default class Fetcher<D, FP, C> {
             resolve(cacheKey);
           });
       } else {
-        resolve();
+        state[cacheKey] = {
+          data: fetchFunctionFirstDegreeResult,
+          loading: false,
+        };
+        resolve(cacheKey);
       }
     });
   }
