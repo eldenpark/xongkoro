@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Header from '@@universal/components/Header';
 import PageDefault from '@@universal/components/PageDefault';
+import PageError from '@@universal/components/PageError';
 import PageOne from '@@universal/components/PageOne';
 import PageThree from '@@universal/components/PageThree';
 import PageTwo from '@@universal/components/PageTwo';
@@ -33,6 +34,10 @@ const Universal: React.FC<{}> = () => {
           <Route
             component={PageThree}
             path="/pageThree"
+          />
+          <Route
+            component={PageError}
+            path="/pageError"
           />
           <Route
             component={PageDefault}

@@ -1,5 +1,10 @@
 /* eslint-disable no-param-reassign */
+import chalk from 'chalk';
 import { XongkoroState } from '../universal/Xongkoro';
+
+import { logger } from 'jege/server';
+
+const log = logger('[xongkoro]');
 
 export default class Fetcher<D, FP, C> {
   promise: Promise<any>;
@@ -24,6 +29,10 @@ export default class Fetcher<D, FP, C> {
             resolve(cacheKey);
           })
           .catch((error) => {
+            log(
+              `Fetcher(): ${chalk.red('error')} executing fetchFunction: %o`,
+              error,
+            );
             state[cacheKey] = {
               data: null,
               error,

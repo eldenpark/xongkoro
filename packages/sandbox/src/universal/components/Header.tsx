@@ -53,6 +53,12 @@ const Header: React.FC<RouteComponentProps> = ({
       >
         page three
       </button>
+      <button
+        onClick={handleClickButton('/pageError')}
+        type="button"
+      >
+        page error
+      </button>
     </div>
   );
 };
