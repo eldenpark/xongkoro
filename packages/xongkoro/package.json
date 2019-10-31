@@ -9,7 +9,6 @@
   "name": "xongkoro",
   "keywords": [],
   "license": "ISC",
-  "peerDependencies": {},
   "publishConfig": {
     "access": "public"
   },
@@ -21,6 +20,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "0.9.4",
-  "devDependencies": {}
+  "version": "0.10.0"
 }
